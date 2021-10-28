@@ -1,0 +1,146 @@
+import React from "react";
+import { View, Text, StyleSheet, FlatList,  TouchableOpacity, Touchable } from "react-native";
+import Colors from "../constant/color"
+import { CATEGORIES } from "../data/cat-data";
+import { useNavigation } from "@react-navigation/native";
+
+
+const mainScreen = () => {
+    React.useLayoutEffect(()=>{
+        navigation.setOptions({
+            title: "Meal Categories",
+            headerStyle: {backgrounColor: Colors.primaryColor },
+            headerTintColor: "white",
+        });
+    });
+    const navigation = useNavigation();
+
+    const renderGridItem =(items) => {
+        //console.log(items);
+        return(
+            <TouchableOpacity style={styles.screen} onPress={() => {
+                 navigation.navigate("display");
+                }}>
+            <View>
+                <Text style={styles.title}>
+                    {items.item.title}
+                </Text>
+            </View>
+            </TouchableOpacity> 
+    );
+};
+
+  return (
+    <FlatList
+        data={CATEGORIES}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        renderItem={renderGridItem}
+    />
+  );
+};
+
+const styles = StyleSheet.create({
+    screen:{
+        flax: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        height: 150,
+        margin: 10,
+
+    },
+    title: {
+        fontSize: 16,
+    },
+});
+
+export default mainScreen;
+/////////////////
+export default{
+    primaryColor: "#4al48c",
+    accentColor: "#ff6f00",
+};
+////////////
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import mainScreen from '../screens/mainScreen';
+import displayScreen from '../screens/displayScreen';
+const Stack = createNativeStackNavigator();
+
+function MealsNavigator() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Main">
+        <Stack.Screen name="Main" component={mainScreen}/>
+        <Stack.Screen name="display" component={displayScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default MealsNavigator;
+///////////////
+import React from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+
+const displayScreen =(props)=>{
+    return(
+        <View>
+            <Text>Go Back</Text>
+            <Button 
+                title="Display Screen" onPress={() =>props.navigation.goBack()}></Button>
+        </View>
+    )
+}
+const styles = StyleSheet.create({})
+
+
+export default displayScreen;
+//////////////////////
+class Category {
+    constructor(id, title, color) {
+        this.id=id;
+        this.title=title;
+        this.color=color;
+    }
+}
+
+export default Category;
+////////////
+import React, { useState } from 'react';
+import { enableScreens } from 'react-native-screens';
+import MealsNavigator from"./src/navigation/MealsNavigator";
+
+enableScreens();
+
+export default function App () {
+  return<MealsNavigator />;
+}
+///////////
+import Category from '../model/category';
+
+export const CATEGORIES = [
+  new Category("c1", "Italian", "#f5428d"),
+  new Category("c2", "Quick & Easy", "#f54242"),
+  new Category("c3", "Hamburgers", "#f5a442"),
+  new Category("c4", "German", "#f5d142"),
+  new Category("c5", "Light & Lovely", "#368dff"),
+  new Category("c6", "Exotic", "#41d95d"),
+  new Category("c7", "Breakfast", "#9eecff"),
+  new Category("c8", "Asian", "#b9ffb0"),
+  new Category("c9", "French", "#ffc7ff"),
+  new Category("c10", "Summer", "#47fced"),
+];
+///////////////
+import * as Fonts from 'expo-font'
+
+const fetchFonts = async () => {
+    await  Fonts.loadAsync({
+        "open-sans": require("../../assets/fonts/OpenSans-Regular.ttf"),
+        "open-sans-bold": require("../../assets/fonts/OpenSans-Bold.ttf"),
+    })
+}
+export default fetchFonts;
+//////////////////
