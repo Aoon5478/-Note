@@ -1,5 +1,6 @@
 // เรียกใช้
 const notesModel = require('./../models/notes.model')
+const usersModel = require('./../models/users.model')
 const nodemailer = require('nodemailer')
 
 module.exports = {
@@ -55,8 +56,10 @@ module.exports = {
         res.send({ notes, today })
     },
     resetPassword: async (req, res) => {
-        const mail = req.query.mail
-        console.log(mail);
+
+        const user = await usersModel.getByUsername(req.query.username)
+
+        const { id, username, email } = user[0]
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -68,20 +71,19 @@ module.exports = {
 
         const mailOptions = {
             from: 'sujiwan678@gmail.com',                // sender
-            to: mail,                // list of receivers
+            to: email,                // list of receivers
             subject: 'เปลี่ยนรหัสผ่าน',              // Mail subject
-            html: '<span>' + description + '</span>'   // HTML body
+            html: `<a href="${process.env.BASE_URL}/Authen/reset_password/${id}" target="_blank">สวัสดีคุณ ${username} กรุณากดเพื่อเข้าสู่ระบบ</a> ` // HTML body
         };
 
         transporter.sendMail(mailOptions, async function (err, info) {
             if (err) { console.log(err) }
             else {
                 console.log(info);
-                const doseUpdate = await notesModel.update(id)
             }
         });
 
-        res.send({ mail })
+        res.send({ user })
     }
 
 }

@@ -24,32 +24,32 @@ class Authen extends CI_Controller
             $this->load->view('templates/footer');
         }
     }
+
     public function login()
     {
         $data = $this->input->post();
-        $data['password'] = sha1($data['password']);
-        $this->Users_model->authen($data);
-        $result = $this->Users_model->authen($data)->result();
-
-        if (COUNT($result) > 0) {
-            $this->session->set_userdata('login', true);
-            $this->session->set_userdata('id', $result[0]->id);
-            redirect('http://localhost/dev/demo/index.php/profile/show', 'refresh');
-        } else {
-            echo "
+        $select_user = $this->Users_model->authen($data)->result();
+        if (COUNT($select_user) > 0) {
+            $select_user = $select_user[0];
+            if ($this->bcrypt->check_password($this->input->post('password'), $select_user->password)) {
+                $this->session->set_userdata('login', true);
+                $this->session->set_userdata('id', $select_user->id);
+                redirect('http://localhost/dev/demo/index.php/profile/show', 'refresh');
+            }
+        }
+        echo "
                 <script>
                     alert('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง')
                 </script>
             ";
 
-            redirect('http://localhost/dev/demo/index.php/Authen/show', 'refresh');
-        }
+        redirect('http://localhost/dev/demo/index.php/Authen/show', 'refresh');
     }
 
     public function reset_password($id)
-    {   
+    {
         $this->session->set_userdata('login', true);
-        $this->session->set_userdata('id',$id);
+        $this->session->set_userdata('id', $id);
         redirect('http://localhost/dev/demo/index.php/Profile/show_edit', 'refresh');
     }
 

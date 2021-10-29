@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col">
     </div>
@@ -11,12 +10,12 @@
     <div class="col"></div>
     <div class="col">
         <div class="mb-3">
-            <label class="form-label">เลือกวันที่</label>
+            <label class="form-label" style="margin-Top: 2rem; font-size: 2rem;">เลือกวันที่</label>
             <div id="datepicker"></div>
         </div>
-        <button type="submit" class="btn btn-primary acd">ค้นหา</button>
-    </div>
+        <button type="submit" class="btn btn-success search_note">ค้นหา</button>
     <div class="col"></div>
+
     <form action="<?php echo $base_url ?>index.php/Note/show_search_table" method="post" id="date_alert">
         <input type="hidden" name="date_alert" id="date_alert_val">
     </form>
@@ -56,7 +55,7 @@
         return [true, ''];
     }
 
-    $('.acd').click(function(e) {
+    $('.search_note').click(function(e) {
         e.preventDefault();
         console.log($('#datepicker').val());
 
@@ -76,31 +75,42 @@
     }
 
     td.highlight a {
-        background: #ad3f29 url('https://64.media.tumblr.com/d08a7d140e2838563e7f4c88a48c286c/tumblr_np6jn4lJNi1upj7y3o3_400.png') 50% 50% repeat-x !important;
+        background: #ad3f29 url('https://shop.line-scdn.net/themeshop/v1/products/83/dd/c5/83ddc5de-ebbc-4a93-bf17-5c09395cfb8f/52/WEBSTORE/icon_198x278.png') 50% 40% repeat-x !important;
         border: 1px #88a276 solid !important;
     }
+
     .ui-datepicker {
         width: 1100px;
         padding: .2em .2em 0;
         display: none;
-        
+
     }
+
     .ui-datepicker table {
         width: 1100px;
-        font-size: 2rem; 
+        font-size: 2rem;
         border-collapse: collapse;
-        margin: 0 0 .4rem;
-       
+        margin: 0 -0.2rem .2rem;
+
     }
-    #datepicker > div > table > thead > tr > th{
-        background-color: gray;
-        /* font-size: 1rem; */
+
+    #datepicker>div>table>thead>tr>th {
+        background-color: #FDB9C8
     }
-    #datepicker > div > table > thead > tr > th.ui-datepicker-week-end{
-        background-color: gray;
+
+    #datepicker>div>table>thead>tr>th.ui-datepicker-week-end {
+        background-color: #FDB9C8;
     }
-    .ui-state-default{
-        height: 90px;
+
+    .ui-state-default {
+        height: 90px; 
     }
-    
+
+    .ui-datepicker .ui-datepicker-title {
+        margin: 0 2 0.3rem;
+        line-height: 2em;
+        text-align: center;
+        font-size: 2rem;
+    }
+
 </style>

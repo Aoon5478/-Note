@@ -69,7 +69,6 @@ class Note extends CI_Controller
         foreach ($notes as $note) {
             $note->time_alert =  substr($note->time_alert, 0, 5);
         }
-
         $this->load->view('templates/header', [
             'navbar' => true,
             'base_url' => base_url()

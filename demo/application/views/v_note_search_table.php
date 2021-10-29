@@ -7,8 +7,8 @@
 </style> -->
 
 <div class="row">
-    <div class="col">
-        <table id="table_note" class="table table-striped table-hover">
+    <div class="col mt-5">
+        <table id="table_note" class="table table-striped table-hover" style="background-color: #FFFAF6;">
             <thead>
                 <tr>
                     <th scope="col">วันที่แจ้งเตือน</th>
@@ -65,17 +65,16 @@
                         </td>
 
                         <td>
-                            <form action="<?php echo $base_url ?>index.php/Note/show_edit" method="post">
+                            <form class="d-grid gap-2 mt-1" action="<?php echo $base_url ?>index.php/Note/show_edit" method="post">
                                 <input type="hidden" name="id" value="<?php echo $note->id ?>">
-                                <button type="submit" class="btn btn-warning">แก้ไข</button>
+                                <button type="submit" style="font-size: 0.75rem;" class="btn btn-warning">แก้ไข</button>
                             </form>
-                            <form action="<?php echo $base_url ?>index.php/Note/delete" method="post">
-
+                            <form class="d-grid gap-2 mt-1" action="<?php echo $base_url ?>index.php/Note/delete" method="post">
                                 <input type="hidden" name="id" value="<?php echo $note->id ?>">
-                                <button type="submit" class="btn btn-danger">ลบ</button>
+                                <button type="submit" style="font-size: 0.75rem;" class="btn btn-danger">ลบ</button>
                             </form>
 
-                            <form action="<?php echo $base_url ?>index.php/Note/update" method="post">
+                            <form class="d-grid gap-2 mt-1" action="<?php echo $base_url ?>index.php/Note/update" method="post">
                                 <input type="hidden" name="id" value="<?php echo $note->id ?>">
                                 <input type="hidden" name="email_status" value="<?php
                                                                                 if ($note->email_status == "active") {
@@ -84,7 +83,7 @@
                                                                                     echo "active";
                                                                                 }
                                                                                 ?>">
-                                <button type="submit" class="btn btn-success">เปลี่ยนสถานะแจ้งเตือนเมล</button>
+                                <button type="submit" style="font-size: 0.75rem;" class="btn btn-success">เปิด/ปิดแจ้งเตือน</button>
                             </form>
 
                         </td>
@@ -126,8 +125,8 @@
     $(document).ready(function() {
         $('#table_note').DataTable({
             "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "ทั้งหมด"]
+                [3, 5, 7, -1],
+                [3, 5, 7, "ทั้งหมด"]
             ],
             "language": {
                 "lengthMenu": "แสดง_MENU_แถวต่อหน้า",
@@ -146,6 +145,8 @@
             }
 
         });
+
+        $('#table_note_filter').css('margin-bottom', '1.5rem');
 
     });
 </script>

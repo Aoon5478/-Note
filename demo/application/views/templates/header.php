@@ -36,10 +36,7 @@
             font-family: 'Mitr', sans-serif;
         }
     </style>
-
-
 </head>
-
 <body id="body-pd">
     <?php
     if (isset($navbar)) {
@@ -54,17 +51,16 @@
                     <div class="input-group" style="max-width: 35rem;">
                         <input name="tag" type="text" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-success">ค้นหา</button>
+                    <button type="submit" class="btn" style="background-color: pink;">ค้นหา</button>
                 </form>
            
-
         </header>
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
                     <a href="#" class="nav_logo">
                         <!-- <i class='bx bx-layer nav_logo-icon'></i> -->
-                        <img src="http://localhost/images/1.jpg" class="rounded-circle" style="max-height: 3rem; ">
+                        <img src="http://localhost/images/2.png" class="rounded-circle" style="max-height: 2.5rem; ">
                         <span class="nav_logo-name">NOTE</span>
                     </a>
                     <div class="nav_list">
@@ -81,15 +77,15 @@
                             </i> <span class="nav_name">เพิ่มรายการโน้ต</span>
                         </a>
                         <a href="<?php echo $base_url ?>index.php/Note/show_search" class="nav_link">
-                            <i class='bx bx-search' style="font-size: 1.5rem; "></i>
-                            <span class="nav_name">ค้นหารายการโน้ต</span>
+                            <i class='bx bx-bar-chart-alt-2 nav_icon' style="font-size: 1.5rem; "></i>
+                            <span class="nav_name">ประวัติ</span>
                              <!-- </a> <a href="#" class="nav_link">
                             <i class='bx bx-folder nav_icon'></i>
                             <span class="nav_name">Files</span> -->
                         </a>
                         <a href="#" class="nav_link">
-                            <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
-                            <span class="nav_name">Stats</span>
+                            <i class='bi bi-question-circle' style="font-size: 1.5rem; "></i>
+                            <span class="nav_name">คู่มือการใช้งาน</span>
                         </a>
                     </div>
                 </div>
@@ -144,13 +140,13 @@
                     align-items: center;
                     /* justify-content: space-between; */
                     padding: 0 1rem;
-                    background-color: var(--white-color);
+                    background-color: #FFE8E8; 
                     z-index: var(--z-fixed);
                     transition: .5s
                 }
 
                 .header_toggle {
-                    color: var(--first-color);
+                    color: #000;
                     font-size: 1.5rem;
                     cursor: pointer
                 }

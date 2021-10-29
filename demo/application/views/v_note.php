@@ -24,21 +24,21 @@
 
         </div>
         <div class="col">
-            <div id="editor">
-                <p>พิมพ์หัวข้อ...</p>
+            <div id="editor"> 
+                <p></p>
             </div>
             <input type="hidden" name="description" id="description">
         </div>
         <div class="col" style="margin-left: -1.5rem; margin-Top: -0.6rem">
             <div class="mb-5">
                 <div class="d-flex justify-content-start border-bottom ">
-                    <button type="button">
+                    <button type="button" style="background-color: #fafafa; border-color:#fafafa;">
                         <label class="btn btn-default ">
-                            <i class='bx bx-image fs-4 '></i>
+                            <i class='bx bx-image fs-4'></i>
                             <input name="formFileImage" type="file" hidden id="formFileImage" onchange="previewImage()">
                         </label>
                     </button>
-                    <button type="button"> 
+                    <button type="button" style="background-color: #fafafa; border-color:#fafafa;"> 
                         <label class="btn btn-default">
                             <i class='bx bxs-videos fs-4 '></i>
                             <input name="formFileVideo" type="file" hidden id="formFileVideo" onchange="previewVideo()">

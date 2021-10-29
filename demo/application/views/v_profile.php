@@ -10,7 +10,7 @@
     <div class="col">
     </div>
     <div class="col text-center">
-        <i class="bi bi-person-circle" style="font-size: 5rem; color: cornflowerblue;"></i>
+        <i class="bi bi-person-circle" style="font-size: 5rem; "></i>
     </div>
     <div class="col"></div>
 </div>

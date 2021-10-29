@@ -19,13 +19,15 @@ class Register extends CI_Controller
         ]);
         $this->load->view('templates/footer');
     }
+
+
     public function save()
     {
         $data = $this->input->post();
         unset($data['re_password']);
         $user = $this->Users_model->get($data['username']);
         if (COUNT($user->result()) == 0) {
-            $data['password'] = sha1($data['password']);
+            $data['password'] =  $this->bcrypt->hash_password($data['password']);
             $this->Users_model->add($data);
             redirect('http://localhost/dev/demo/index.php/Authen/show', 'refresh');
         } else {

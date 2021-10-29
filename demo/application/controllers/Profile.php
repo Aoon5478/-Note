@@ -54,7 +54,7 @@ class Profile extends CI_Controller
         if ($data['password'] == '') {
             unset($data['password']);
         } else {
-            $data['password'] = sha1($data['password']);
+            $data['password'] = $this->bcrypt->hash_password($data['password']);
         }
         $this->Users_model->update($data);
         redirect('http://localhost/dev/demo/index.php/Profile/show', 'refresh');
