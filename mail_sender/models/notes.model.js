@@ -10,7 +10,9 @@ module.exports = {
         'description',
         'email',
         'date_alert',
-        'time_alert'
+        'time_alert',
+        'tag',
+        'path_image'
       )
       .from('notes')
       .leftJoin('users', 'notes.create_by', 'users.id')

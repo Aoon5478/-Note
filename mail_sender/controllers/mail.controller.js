@@ -38,20 +38,51 @@ module.exports = {
         notes.map(note => {
 
 
-            const { id, description, email, date_alert, } = note
-            const mailOptions = {
-                from: 'sujiwan678@gmail.com',                // sender
-                to: email,                // list of receivers
-                subject: 'แจ้งเตือนผ่านเมล' + date_alert,              // Mail subject
-                html: '<span>' + description + '</span>'   // HTML body
-            };
-            transporter.sendMail(mailOptions, async function (err, info) {
-                if (err) { console.log(err) }
-                else {
-                    console.log(info);
-                    const doseUpdate = await notesModel.update(id)
-                }
-            });
+            const { id, description, email, date_alert, tag, path_image } = note  // ตรงนี้
+            const nameImg = path_image.split("/")[3]
+            if (nameImg) {
+                const mailOptions = {
+                    from: 'sujiwan678@gmail.com',                // sender
+                    to: email,                // list of receivers
+                    subject: 'แจ้งเตือนผ่านเมล' + date_alert,              // Mail subject
+                    html: `
+                    <h1> tag : ${tag} </h1>
+                     <span>ข้อความแจ้งเตือน :  ${description} </span>
+                     <img src="cid:img" />
+                     `   // HTML body
+                    , attachments: [{
+                        filename: nameImg,
+                        path: `${process.env.BASE_URL}${path_image.substring(1, path_image.length)}`, // path contains the filename, do not just give path of folder where images are reciding.
+                        cid: 'img' // give any unique name to the image and make sure, you do not repeat the same string in given attachment array of object.
+                    }]
+                };
+                transporter.sendMail(mailOptions, async function (err, info) {
+                    if (err) { console.log(err) }
+                    else {
+                        console.log(info);
+                        const doseUpdate = await notesModel.update(id)
+                    }
+                });
+            } else {
+                const mailOptions = {
+                    from: 'sujiwan678@gmail.com',                // sender
+                    to: email,                // list of receivers
+                    subject: 'แจ้งเตือนผ่านเมล' + date_alert,              // Mail subject
+                    html: `
+                    <h1> tag : ${tag} </h1>
+                     <span>ข้อความแจ้งเตือน :  ${description} </span>
+                     `   // HTML body
+                    ,
+                };
+                transporter.sendMail(mailOptions, async function (err, info) {
+                    if (err) { console.log(err) }
+                    else {
+                        console.log(info);
+                        const doseUpdate = await notesModel.update(id)
+                    }
+                });
+            }
+
         })
         res.send({ notes, today })
     },
